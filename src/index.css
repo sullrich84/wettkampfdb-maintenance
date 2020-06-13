@@ -37,5 +37,30 @@ h1 {
 
 .card {
   max-width: 400px;
-  padding: 20px;
+  padding: 3em;
+  background-color: rgba(17, 17, 17, 0.75);
+  border: 1px solid #333;
+}
+
+.font-gray {
+  color: #666;
+}
+
+footer {
+  margin-top: 2em;
+  padding-top: 2em;
+  border-top: 1px solid rgb(153, 153, 153);
+  color: rgb(153, 153, 153);
+}
+
+footer span[role="img"] {
+  color: transparent;
+  text-shadow: rgb(153, 153, 153) 0 0 0;
+  font-size: 0.75em;
+  padding: 0 0.4em;
+}
+
+footer address {
+  margin-top: 0.25em;
+  font-style: normal;
 }
