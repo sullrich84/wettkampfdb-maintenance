@@ -1,0 +1,44 @@
+replicaCount: 1
+
+nameOverride: "wettkampfdb-message-queue"
+fullnameOverride: "wettkampfdb-message-queue"
+
+image:
+  repository: docker.pkg.github.com/sullrich84/wettkampfdb-message-queue/wettkampfdb-message-queue
+  pullPolicy: Always
+  debug: true
+  tag: latest
+
+imagePullSecrets:
+  - name: registry-cred
+
+serviceAccount:
+  create: true
+  name: "wettkampfdb-message-queue-service-user"
+  annotations: {}
+
+service:
+  type: ClusterIP
+
+podSecurityContext:
+  fsGroup: 1001
+  runAsUser: 1001
+
+deployment:
+  initialDelaySeconds: 10
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+podAnnotations: {}
+securityContext: {}
+resources: {}
+nodeSelector: {}
+affinity: {}
+tolerations: {}
