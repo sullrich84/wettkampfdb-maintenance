@@ -1,7 +1,7 @@
 replicaCount: 1
 
-nameOverride: "wettkampfdb-maintenance"
-fullnameOverride: "wettkampfdb-maintenance"
+nameOverride: "wdb-maintenance"
+fullnameOverride: "wdb-maintenance"
 
 image:
   repository: docker.pkg.github.com/sullrich84/wettkampfdb-maintenance/wdb-maintenance
@@ -14,7 +14,7 @@ imagePullSecrets:
 
 serviceAccount:
   create: true
-  name: "wettkampfdb-maintenance-service-user"
+  name: "wdb-maintenance-service-user"
   annotations: {}
 
 service:

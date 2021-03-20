@@ -7,8 +7,8 @@ repository_path = ~/github/wettkampfdb-maintenance
 chart_path 			= ~/github/wettkampfdb-maintenance/helmchart
 catalog_path 		= ~/github/wettkampfdb-helm-catalog
 
-private_port 		= 80
-public_port 		= 8888
+internal_port 	= 80
+local_port 			= 8888
 
 ###
 ### Actions for Docker
@@ -20,7 +20,7 @@ build:
 run:
 	docker run -i -t --rm \
 		--hostname=$(helm_chart_name) \
-		--publish=$(public_port):$(private_port) \
+		--publish=$(local_port):$(internal_port) \
 		--name="$(helm_chart_name)" \
 		$(helm_chart_name)
 
@@ -34,7 +34,7 @@ watch:
 	watch kubectl get all
 
 forward: 
-	kubectl port-forward --namespace default svc/$(helm_chart_name) $(public_port):$(private_port)
+	kubectl port-forward --namespace default svc/$(helm_chart_name) $(local_port):$(internal_port)
 
 ### 
 ### Actions for Helm
