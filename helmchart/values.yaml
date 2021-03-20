@@ -1,10 +1,10 @@
 replicaCount: 1
 
-nameOverride: "wettkampfdb-message-queue"
-fullnameOverride: "wettkampfdb-message-queue"
+nameOverride: "wettkampfdb-maintenance"
+fullnameOverride: "wettkampfdb-maintenance"
 
 image:
-  repository: docker.pkg.github.com/sullrich84/wettkampfdb-message-queue/wettkampfdb-message-queue
+  repository: docker.pkg.github.com/sullrich84/wettkampfdb-maintenance/wdb-maintenance
   pullPolicy: Always
   debug: true
   tag: latest
@@ -14,7 +14,7 @@ imagePullSecrets:
 
 serviceAccount:
   create: true
-  name: "wettkampfdb-message-queue-service-user"
+  name: "wettkampfdb-maintenance-service-user"
   annotations: {}
 
 service:

@@ -4,10 +4,11 @@
 
 helm_chart_name = wettkampfdb-maintenance
 repository_path = ~/github/wettkampfdb-maintenance
-catalog_path = ~/github/wettkampfdb-helm-catalog
+chart_path 			= ~/github/wettkampfdb-maintenance/helmchart
+catalog_path 		= ~/github/wettkampfdb-helm-catalog
 
-private_port = 80
-public_port = 8888
+private_port 		= 80
+public_port 		= 8888
 
 ###
 ### Actions for Docker
@@ -47,7 +48,7 @@ template:
 	cd helmchart; helm template $(helm_chart_name) .
 
 install:
-	helm install $(helm_chart_name) $(catalog_path) --values $(catalog_path)/values.yaml
+	helm install $(helm_chart_name) $(chart_path) --values $(chart_path)/values.yaml
 
 uninstall:
 	helm uninstall $(helm_chart_name)
