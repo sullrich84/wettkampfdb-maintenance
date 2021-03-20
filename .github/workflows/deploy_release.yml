@@ -13,9 +13,6 @@ env:
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./service
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
