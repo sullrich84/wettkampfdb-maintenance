@@ -7,8 +7,8 @@ repository_path = ~/github/wettkampfdb-maintenance
 chart_path 			= ~/github/wettkampfdb-maintenance/helmchart
 catalog_path 		= ~/github/wettkampfdb-helm-catalog
 
-internal_port 	= 80
-local_port 			= 8888
+internal_port 	= 8080
+local_port 			= 8080
 
 ###
 ### Actions for Docker
@@ -56,6 +56,9 @@ reinstall:
 ###
 ### Utils
 ###
+
+release:
+	echo  
 
 minikube:
 	minikube start
