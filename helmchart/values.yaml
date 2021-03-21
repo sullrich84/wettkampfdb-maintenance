@@ -43,7 +43,7 @@ service:
 
 podSecurityContext:
   fsGroup: 101
-  runAsUser: nginx
+  runAsUser: 101
 
 ingress:
   enabled: false
