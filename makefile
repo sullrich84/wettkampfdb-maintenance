@@ -40,10 +40,6 @@ forward:
 ### Actions for Helm
 ###
 
-package:
-	cd $(catalog_path); helm package --debug $(repository_path)/helmchart/
-	cd $(catalog_path); helm repo index .
-
 template:
 	cd helmchart; helm template $(helm_chart_name) .
 
@@ -67,3 +63,7 @@ minikube:
 
 regcred: 
 	kubectl create secret docker-registry registry-cred --docker-server=docker.pkg.github.com --docker-username="$(GITHUB_USERNAME)" --docker-password="$(GITHUB_TOKEN)"
+
+package:
+	cd $(catalog_path); helm package --debug $(repository_path)/helmchart/
+	cd $(catalog_path); helm repo index .
