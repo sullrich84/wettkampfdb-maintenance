@@ -34,23 +34,11 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
+            {{- toYaml .Values.containerPorts | nindent 12 }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: {{ .Values.deployment.initialDelaySeconds }}
-            failureThreshold: 5
-            periodSeconds: 5       
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            initialDelaySeconds: {{ .Values.deployment.initialDelaySeconds }}
-            failureThreshold: 5
-            periodSeconds: 5         
+            {{- toYaml .Values.readinessProbe | nindent 12 }}   
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

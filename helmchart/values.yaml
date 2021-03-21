@@ -12,6 +12,27 @@ image:
 imagePullSecrets:
   - name: registry-cred
 
+containerPorts:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 10
+  failureThreshold: 5
+  periodSeconds: 5
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+  initialDelaySeconds: 10
+  failureThreshold: 5
+  periodSeconds: 5
+
 serviceAccount:
   create: true
   name: "wdb-maintenance-service-user"
@@ -21,11 +42,7 @@ service:
   type: ClusterIP
 
 podSecurityContext:
-  fsGroup: 1001
-  runAsUser: 1001
-
-deployment:
-  initialDelaySeconds: 10
+  runAsUser: 0
 
 ingress:
   enabled: false

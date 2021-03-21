@@ -53,13 +53,17 @@ install:
 uninstall:
 	helm uninstall $(helm_chart_name)
 
-deploy: 
+reinstall: 
 	-make uninstall 
 	-make install
 
 ###
 ### Utils
 ###
+
+minikube:
+	minikube start
+	minikube dashboard
 
 regcred: 
 	kubectl create secret docker-registry registry-cred --docker-server=docker.pkg.github.com --docker-username="$(GITHUB_USERNAME)" --docker-password="$(GITHUB_TOKEN)"
