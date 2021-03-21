@@ -42,7 +42,8 @@ service:
   type: ClusterIP
 
 podSecurityContext:
-  runAsUser: 0
+  fsGroup: 101
+  runAsUser: nginx
 
 ingress:
   enabled: false
