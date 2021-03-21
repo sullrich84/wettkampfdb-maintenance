@@ -67,3 +67,8 @@ regcred:
 package:
 	cd $(catalog_path); helm package --debug $(repository_path)/helmchart/
 	cd $(catalog_path); helm repo index .
+	cd $(catalog_path); git pull
+	cd $(catalog_path); git add .
+	cd $(catalog_path); git commit -m "Catalog update"
+	cd $(catalog_path); git push origin master
+
