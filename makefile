@@ -2,7 +2,7 @@
 ### Global Variables
 ###
 
-helm_chart_name = wettkampfdb-maintenance
+helm_chart_name = wdb-maintenance
 repository_path = ~/github/wettkampfdb-maintenance
 chart_path 			= ~/github/wettkampfdb-maintenance/helmchart
 catalog_path 		= ~/github/wettkampfdb-helm-catalog
