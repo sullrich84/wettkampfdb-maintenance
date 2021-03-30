@@ -4,7 +4,7 @@ nameOverride: "wdb-maintenance"
 fullnameOverride: "wdb-maintenance"
 
 image:
-  repository: docker.pkg.github.com/sullrich84/wettkampfdb-maintenance/wdb-maintenance
+  repository: ghcr.io/sullrich84/wdb-maintenance
   pullPolicy: Always
   debug: true
   tag: latest
