@@ -25,7 +25,7 @@ jobs:
       ###
       - name: Docker Push
         run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD docker.pkg.github.com
-          docker tag $IMAGE_NAME docker.pkg.github.com/sullrich84/$REPOSITORY_NAME/$IMAGE_NAME:latest
-          docker tag $IMAGE_NAME docker.pkg.github.com/sullrich84/$REPOSITORY_NAME/$IMAGE_NAME:$(git describe --abbrev=0 --tags)
-          docker push -a docker.pkg.github.com/sullrich84/$REPOSITORY_NAME/$IMAGE_NAME
+          docker login ghcr.io -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker tag $IMAGE_NAME ghcr.io/sullrich84/$IMAGE_NAME:latest
+          docker tag $IMAGE_NAME ghcr.io/sullrich84/$IMAGE_NAME:$(git describe --abbrev=0 --tags)
+          docker push -a ghcr.io/sullrich84/$IMAGE_NAME
