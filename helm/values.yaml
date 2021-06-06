@@ -9,6 +9,13 @@ image:
   debug: true
   tag: latest
 
+ingress:
+  enabled: true
+  targetPort: 8080
+  hosts:
+    - maintenance.wettkampfdb.de
+    - www.maintenance.wettkampfdb.de
+
 imagePullSecrets:
   - name: registry-cred
 
@@ -44,9 +51,6 @@ service:
 podSecurityContext:
   fsGroup: 1001
   runAsUser: 1001
-
-ingress:
-  enabled: false
 
 autoscaling:
   enabled: false
