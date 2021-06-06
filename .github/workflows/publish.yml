@@ -1,0 +1,60 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+env:
+  IMAGE_NAME: ghcr.io/sullrich84/wdb-maintenance
+  GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  publish_image:
+    name: Publish image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Git Describe
+        run: echo "git_describe=$(git describe --tags --always)" >> $GITHUB_ENV
+
+      - name: Build image
+        run: docker build . -t $IMAGE_NAME-${{ env.git_describe }}
+
+      - name: Publish image
+        run: |
+          docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+          docker push $IMAGE_NAME-${{ env.git_describe }}
+
+  publish_helmchart:
+    name: Publish Helm Chart
+    needs: publish_image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Git Describe
+        run: echo "git_describe=$(git describe --tags --always)" >> $GITHUB_ENV
+
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ env.GITHUB_TOKEN }}
+          charts_dir: .
+          charts_url: https://raw.githubusercontent.com/sullrich84/wettkampfdb-helm-catalog/master
+          repository: wettkampfdb-helm-catalog
+          branch: master
+          commit_username: GitHub CI
+          app_version: ${{ env.git_describe }}
+          chart_version: ${{ env.git_describe }}
