@@ -22,6 +22,9 @@ USER root
 # Copy application and custom NGINX configuration
 COPY --from=build /app/build /usr/share/nginx/html
 
+# Copy nginx config
+COPY config/default.conf /etc/nginx/conf.d/default.conf 
+
 # Setup unprivileged user 1001
 RUN chown -R 1001 /usr/share/nginx/html
 

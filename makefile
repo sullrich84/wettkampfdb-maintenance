@@ -4,8 +4,7 @@
 
 helm_chart_name = wdb-maintenance
 repository_path = ~/github/wettkampfdb-maintenance
-chart_path 			= ~/github/wettkampfdb-maintenance/helmchart
-catalog_path 		= ~/github/wettkampfdb-helm-catalog
+chart_path 			= ~/github/wettkampfdb-maintenance/helm
 
 internal_port 	= 8080
 local_port 			= 8080
@@ -57,21 +56,6 @@ reinstall:
 ### Utils
 ###
 
-release:
-	echo  
-
 minikube:
 	minikube start
 	minikube dashboard
-
-regcred: 
-	kubectl create secret docker-registry registry-cred --docker-server=docker.pkg.github.com --docker-username="$(GITHUB_USERNAME)" --docker-password="$(GITHUB_TOKEN)"
-
-package:
-	cd $(catalog_path); helm package --debug $(repository_path)/helmchart/
-	cd $(catalog_path); helm repo index .
-	cd $(catalog_path); git pull
-	cd $(catalog_path); git add .
-	cd $(catalog_path); git commit -m "Catalog update"
-	cd $(catalog_path); git push origin master
-
