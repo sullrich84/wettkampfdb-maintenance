@@ -1,0 +1,28 @@
+{{- $appName := include "app.fullname" . -}}
+{{- $servicePort := (index .Values.containerPorts (index .Values.ingress.targetPortName)).containerPort -}}
+
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ include "app.fullname" . }}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+    kubernetes.io/tls-acme: '''"true"'''
+spec:
+  rules: |-
+    {{- range $host := .Values.ingress.hosts }}
+    - host: {{ $host }}
+      http:
+        paths:
+        - backend:
+            serviceName: {{ $appName }}
+            servicePort: {{ $servicePort }}
+    {{- end }}
+  tls:
+  - hosts: |-
+      {{- range $host := .Values.ingress.hosts }}
+      - {{ $host }}
+        secretName: {{ $host }}-secret
+      {{- end }}
+{{- end }}

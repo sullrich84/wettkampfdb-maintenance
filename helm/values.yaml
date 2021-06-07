@@ -11,7 +11,7 @@ image:
 
 ingress:
   enabled: true
-  targetPort: 8080
+  targetPortName: http
   hosts:
     - maintenance.wettkampfdb.de
     - www.maintenance.wettkampfdb.de
@@ -20,7 +20,8 @@ imagePullSecrets:
   - name: registry-cred
 
 containerPorts:
-  - name: http
+  http:
+    name: http
     containerPort: 8080
     protocol: TCP
 
