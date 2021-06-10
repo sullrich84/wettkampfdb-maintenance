@@ -12,9 +12,8 @@ image:
 ingress:
   enabled: true
   targetPortName: http
-  hosts:
-    - maintenance.wettkampfdb.de
-    - www.maintenance.wettkampfdb.de
+  host: maintenance.wettkampfdb.de
+  www: false
 
 imagePullSecrets:
   - name: registry-cred

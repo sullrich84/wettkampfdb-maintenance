@@ -11,8 +11,14 @@ metadata:
     kubernetes.io/tls-acme: '''"true"'''
 spec:
   rules: |-
-    {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host }}
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+        - backend:
+            serviceName: {{ $appName }}
+            servicePort: {{ $servicePort }}
+    {{- if .Values.ingress.www }}
+    - host: www.{{ .Values.ingress.host }}
       http:
         paths:
         - backend:
@@ -21,8 +27,10 @@ spec:
     {{- end }}
   tls:
   - hosts: |-
-      {{- range $host := .Values.ingress.hosts }}
-      - {{ $host }}
-        secretName: {{ $host }}-secret
+      - {{ .Values.ingress.host }}
+        secretName: {{ .Values.ingress.host | replace "." "-" }}-secret
+      {{- if .Values.ingress.www }}
+      - www.{{ .Values.ingress.host }}
+        secretName: www-{{ .Values.ingress.host | replace "." "-" }}-secret
       {{- end }}
 {{- end }}
