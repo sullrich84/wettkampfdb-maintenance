@@ -10,7 +10,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
     kubernetes.io/tls-acme: '''"true"'''
 spec:
-  rules: |-
+  rules:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
@@ -26,11 +26,12 @@ spec:
             servicePort: {{ $servicePort }}
     {{- end }}
   tls:
-  - hosts: |-
+    - hosts:
       - {{ .Values.ingress.host }}
-        secretName: {{ .Values.ingress.host | replace "." "-" }}-secret
-      {{- if .Values.ingress.www }}
+      secretName: {{ .Values.ingress.host | replace "." "-" }}-secret
+    {{- if .Values.ingress.www }}
+    - hosts:
       - www.{{ .Values.ingress.host }}
-        secretName: www-{{ .Values.ingress.host | replace "." "-" }}-secret
-      {{- end }}
+      secretName: {{ .Values.ingress.host | replace "." "-" }}-secret
+    {{- end }}
 {{- end }}
